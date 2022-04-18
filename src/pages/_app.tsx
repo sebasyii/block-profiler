@@ -10,6 +10,7 @@ import {
 
 import { DefaultSeo } from "next-seo";
 import SEO from "../../next-seo.config";
+import { ChainContext } from "@/contexts/ChainContext";
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
@@ -34,7 +35,14 @@ const App = (props: AppProps) => {
             colorScheme: "light",
           }}
         >
-          <Component {...pageProps} />
+          <ChainContext.Provider
+            value={{
+              chainId: 1,
+              rpcUrl: "https://rpc.ankr.com/eth",
+            }}
+          >
+            <Component {...pageProps} />
+          </ChainContext.Provider>
         </MantineProvider>
       </ColorSchemeProvider>
     </>
